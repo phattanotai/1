@@ -1,0 +1,48 @@
+# Project: Paint
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = Paint_private.res
+OBJ  = main.o mouse.o file.o window.o function.o menu.o $(RES)
+LINKOBJ  = main.o mouse.o file.o window.o function.o menu.o $(RES)
+LIBS =  -L"C:/Program Files/Dev-Cpp/lib" -lm -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32 -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32  
+INCS =  -I"C:/Program Files/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Program Files/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Program Files/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Program Files/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Program Files/Dev-Cpp/include/c++/3.4.2"  -I"C:/Program Files/Dev-Cpp/include" 
+BIN  = Paint.exe
+CXXFLAGS = $(CXXINCS)  
+CFLAGS = $(INCS)  
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before Paint.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "Paint.exe" $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+mouse.o: mouse.cpp
+	$(CPP) -c mouse.cpp -o mouse.o $(CXXFLAGS)
+
+file.o: file.cpp
+	$(CPP) -c file.cpp -o file.o $(CXXFLAGS)
+
+window.o: window.cpp
+	$(CPP) -c window.cpp -o window.o $(CXXFLAGS)
+
+function.o: function.cpp
+	$(CPP) -c function.cpp -o function.o $(CXXFLAGS)
+
+menu.o: menu.cpp
+	$(CPP) -c menu.cpp -o menu.o $(CXXFLAGS)
+
+Paint_private.res: Paint_private.rc 
+	$(WINDRES) -i Paint_private.rc --input-format=rc -o Paint_private.res -O coff 
